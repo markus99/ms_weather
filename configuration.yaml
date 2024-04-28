@@ -1,0 +1,44 @@
+## Excerpt from configuration.yaml containing weather.get_forecasts
+
+## DAILY
+template:
+  - trigger:
+    - platform: state
+      entity_id: weather.forecast_david_ln
+    - platform: homeassistant
+      event: start
+    action:
+      - service: weather.get_forecasts
+        data:
+          type: daily
+        target:
+          entity_id: weather.forecast_david_ln
+        response_variable: daily
+    sensor:
+      - name: Weatherflow Forecast Daily
+        unique_id: forecast_david_ln_forecast_daily
+        state: "{{ now().isoformat() }}"
+#        state: "{{ daily['weather.forecast_david_ln'].forecast[0].condition }}"
+        attributes:
+          forecast: "{{ daily['weather.forecast_david_ln'].forecast }}"
+
+## HOURLY
+  - trigger:
+    - platform: state
+      entity_id: weather.forecast_david_ln
+    - platform: homeassistant
+      event: start
+    action:
+      - service: weather.get_forecasts
+        data:
+          type: hourly
+        target:
+          entity_id: weather.forecast_david_ln
+        response_variable: hourly
+    sensor:
+      - name: Weatherflow Forecast Hourly
+        unique_id: forecast_david_ln_forecast_hourly
+        state: "{{ now().isoformat() }}"
+#        state: "{{ hourly['weather.forecast_david_ln'].forecast[0].condition }}"
+        attributes:
+          forecast: "{{ hourly['weather.forecast_david_ln'].forecast }}"
