@@ -1,0 +1,370 @@
+sensor:
+  - platform: template
+    sensors:
+
+      ## Weather Days / Icons
+      m99_weather_date_1d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ (as_timestamp(strptime(states('sensor.date'),'%Y-%m-%d')) + (1*86400)) | timestamp_custom('%a') }}"
+        icon_template: >
+          {% set array = { 'clear-night':'night',
+                            'cloudy':'cloudy',
+                            'exceptional':'sunny',
+                            'fog':'fog',
+                            'hail':'hail',
+                            'lightning':'lightning',
+                            'lightning-rainy':'lightning-rainy',
+                            'partlycloudy':'partly-cloudy',
+                            'rainy':'rainy',
+                            'snowy':'snowy',
+                            'snowy-rainy':'snowy-rainy',
+                            'sunny':'sunny',
+                            'windy':'windy' } %}
+          {% if state_attr('sensor.weatherflow_forecast_daily','forecast').1.condition is defined %}
+            {% set icon = array[state_attr('sensor.weatherflow_forecast_daily','forecast').1.condition] %}
+            {% if state_attr('sensor.weatherflow_forecast_daily','forecast').1.condition == 'rainy' and
+                  state_attr('sensor.weatherflow_forecast_daily','forecast').1.precipitation_probability | int <= 30 %}
+              {% set icon = 'partly-cloudy' %}
+            {% endif %}
+            mdi:weather-{{ icon }}
+          {% else %}
+            mdi:minus
+          {% endif %}
+      m99_weather_date_2d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ (as_timestamp(strptime(states('sensor.date'),'%Y-%m-%d')) + (2*86400)) | timestamp_custom('%a') }}"
+        icon_template: >
+          {% set array = { 'clear-night':'night',
+                            'cloudy':'cloudy',
+                            'exceptional':'sunny',
+                            'fog':'fog',
+                            'hail':'hail',
+                            'lightning':'lightning',
+                            'lightning-rainy':'lightning-rainy',
+                            'partlycloudy':'partly-cloudy',
+                            'rainy':'rainy',
+                            'snowy':'snowy',
+                            'snowy-rainy':'snowy-rainy',
+                            'sunny':'sunny',
+                            'windy':'windy' } %}
+          {% if state_attr('sensor.weatherflow_forecast_daily','forecast').2.condition is defined %}
+            {% set icon = array[state_attr('sensor.weatherflow_forecast_daily','forecast').2.condition] %}
+            {% if state_attr('sensor.weatherflow_forecast_daily','forecast').2.condition == 'rainy' and
+                  state_attr('sensor.weatherflow_forecast_daily','forecast').2.precipitation_probability | int <= 30 %}
+              {% set icon = 'partly-cloudy' %}
+            {% endif %}
+            mdi:weather-{{ icon }}
+          {% else %}
+            mdi:minus
+          {% endif %}
+      m99_weather_date_3d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ (as_timestamp(strptime(states('sensor.date'),'%Y-%m-%d')) + (3*86400)) | timestamp_custom('%a') }}"
+        icon_template: >
+          {% set array = { 'clear-night':'night',
+                            'cloudy':'cloudy',
+                            'exceptional':'sunny',
+                            'fog':'fog',
+                            'hail':'hail',
+                            'lightning':'lightning',
+                            'lightning-rainy':'lightning-rainy',
+                            'partlycloudy':'partly-cloudy',
+                            'rainy':'rainy',
+                            'snowy':'snowy',
+                            'snowy-rainy':'snowy-rainy',
+                            'sunny':'sunny',
+                            'windy':'windy' } %}
+          {% if state_attr('sensor.weatherflow_forecast_daily','forecast').3.condition is defined %}
+            {% set icon = array[state_attr('sensor.weatherflow_forecast_daily','forecast').3.condition] %}
+            {% if state_attr('sensor.weatherflow_forecast_daily','forecast').3.condition == 'rainy' and
+                  state_attr('sensor.weatherflow_forecast_daily','forecast').3.precipitation_probability | int <= 30 %}
+              {% set icon = 'partly-cloudy' %}
+            {% endif %}
+            mdi:weather-{{ icon }}
+          {% else %}
+            mdi:minus
+          {% endif %}
+      m99_weather_date_4d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ (as_timestamp(strptime(states('sensor.date'),'%Y-%m-%d')) + (4*86400)) | timestamp_custom('%a') }}"
+        icon_template: >
+          {% set array = { 'clear-night':'night',
+                            'cloudy':'cloudy',
+                            'exceptional':'sunny',
+                            'fog':'fog',
+                            'hail':'hail',
+                            'lightning':'lightning',
+                            'lightning-rainy':'lightning-rainy',
+                            'partlycloudy':'partly-cloudy',
+                            'rainy':'rainy',
+                            'snowy':'snowy',
+                            'snowy-rainy':'snowy-rainy',
+                            'sunny':'sunny',
+                            'windy':'windy' } %}
+          {% if state_attr('sensor.weatherflow_forecast_daily','forecast').4.condition is defined %}
+            {% set icon = array[state_attr('sensor.weatherflow_forecast_daily','forecast').4.condition] %}
+            {% if state_attr('sensor.weatherflow_forecast_daily','forecast').4.condition == 'rainy' and
+                  state_attr('sensor.weatherflow_forecast_daily','forecast').4.precipitation_probability | int <= 30 %}
+              {% set icon = 'partly-cloudy' %}
+            {% endif %}
+            mdi:weather-{{ icon }}
+          {% else %}
+            mdi:minus
+          {% endif %}
+      m99_weather_date_5d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ (as_timestamp(strptime(states('sensor.date'),'%Y-%m-%d')) + (5*86400)) | timestamp_custom('%a') }}"
+        icon_template: >
+          {% set array = { 'clear-night':'night',
+                            'cloudy':'cloudy',
+                            'exceptional':'sunny',
+                            'fog':'fog',
+                            'hail':'hail',
+                            'lightning':'lightning',
+                            'lightning-rainy':'lightning-rainy',
+                            'partlycloudy':'partly-cloudy',
+                            'rainy':'rainy',
+                            'snowy':'snowy',
+                            'snowy-rainy':'snowy-rainy',
+                            'sunny':'sunny',
+                            'windy':'windy' } %}
+          {% if state_attr('sensor.weatherflow_forecast_daily','forecast').5.condition is defined %}
+            {% set icon = array[state_attr('sensor.weatherflow_forecast_daily','forecast').5.condition] %}
+            {% if state_attr('sensor.weatherflow_forecast_daily','forecast').5.condition == 'rainy' and
+                  state_attr('sensor.weatherflow_forecast_daily','forecast').5.precipitation_probability | int <= 30 %}
+              {% set icon = 'partly-cloudy' %}
+            {% endif %}
+            mdi:weather-{{ icon }}
+          {% else %}
+            mdi:minus
+          {% endif %}
+
+      ## Temperature Sensors - HIGH
+      m99_weather_temp_high_0d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').0.temperature | round(0) }}"
+      m99_weather_temp_high_1d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').1.temperature | round(0) }}"
+      m99_weather_temp_high_2d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').2.temperature | round(0) }}"
+      m99_weather_temp_high_3d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').3.temperature | round(0) }}"
+      m99_weather_temp_high_4d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').4.temperature | round(0) }}"
+      m99_weather_temp_high_5d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').5.temperature | round(0) }}"
+
+      ## Temperature Sensors - LOW
+      m99_weather_temp_low_0d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').0.templow | round(0) }}"
+      m99_weather_temp_low_1d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').1.templow | round(0) }}"
+      m99_weather_temp_low_2d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').2.templow | round(0) }}"
+      m99_weather_temp_low_3d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').3.templow | round(0) }}"
+      m99_weather_temp_low_4d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').4.templow | round(0) }}"
+      m99_weather_temp_low_5d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').5.templow | round(0) }}"
+
+      m99_weather_hi_low_today:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_temp_high_0d') }} / {{ states('sensor.m99_weather_temp_low_0d') }}"
+
+      ## Temperature Sensors Combined ( HI/LOW )
+      m99_weather_temp_both_1d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_temp_high_1d') }}{{'/'}}{{ states('sensor.m99_weather_temp_low_1d') }}"
+      m99_weather_temp_both_2d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_temp_high_2d') }}{{'/'}}{{ states('sensor.m99_weather_temp_low_2d') }}"
+      m99_weather_temp_both_3d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_temp_high_3d') }}{{'/'}}{{ states('sensor.m99_weather_temp_low_3d') }}"
+      m99_weather_temp_both_4d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_temp_high_4d') }}{{'/'}}{{ states('sensor.m99_weather_temp_low_4d') }}"
+      m99_weather_temp_both_5d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_temp_high_5d') }}{{'/'}}{{ states('sensor.m99_weather_temp_low_5d') }}"
+
+      ## Wind Speed Sensors
+      m99_weather_wind_0d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.david_ln_sensors_wind_speed') | float | round(1) }}"
+        #unit_of_measurement: 'mph'
+      m99_weather_wind_1d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').1.wind_speed | float | round(1) }}"
+      m99_weather_wind_2d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').2.wind_speed | float | round(1) }}"
+      m99_weather_wind_3d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').3.wind_speed | float | round(1) }}"
+      m99_weather_wind_4d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').4.wind_speed | float | round(1) }}"
+      m99_weather_wind_5d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ state_attr('sensor.weatherflow_forecast_daily','forecast').5.wind_speed | float | round(1) }}"
+
+      ## Wind Direction Senors ( DIR )
+      m99_weather_wind_dir_0d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = state_attr('weather.forecast_david_ln','wind_bearing')|float(0) %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+      m99_weather_wind_dir_1d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = state_attr('sensor.weatherflow_forecast_daily','forecast').1.wind_bearing|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+      m99_weather_wind_dir_2d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = state_attr('sensor.weatherflow_forecast_daily','forecast').2.wind_bearing|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+      m99_weather_wind_dir_3d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = state_attr('sensor.weatherflow_forecast_daily','forecast').3.wind_bearing|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+      m99_weather_wind_dir_4d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = state_attr('sensor.weatherflow_forecast_daily','forecast').4.wind_bearing|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+      m99_weather_wind_dir_5d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = state_attr('sensor.weatherflow_forecast_daily','forecast').5.wind_bearing|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+
+      ## Wind Sensors Combined for Display ( # DIR )
+      m99_weather_wind_both_0d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_wind_0d')|round(0) }}{{' '}}{{ states('sensor.m99_weather_wind_dir_0d') }}"
+      m99_weather_wind_both_1d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_wind_1d')|round(0) }}{{' '}}{{ states('sensor.m99_weather_wind_dir_1d') }}"
+      m99_weather_wind_both_2d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_wind_2d')|round(0) }}{{' '}}{{ states('sensor.m99_weather_wind_dir_2d') }}"
+      m99_weather_wind_both_3d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_wind_3d')|round(0) }}{{' '}}{{ states('sensor.m99_weather_wind_dir_3d') }}"
+      m99_weather_wind_both_4d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_wind_4d')|round(0) }}{{' '}}{{ states('sensor.m99_weather_wind_dir_4d') }}"
+      m99_weather_wind_both_5d:
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: "{{ states('sensor.m99_weather_wind_5d')|round(0) }}{{' '}}{{ states('sensor.m99_weather_wind_dir_5d') }}"
+
+      ## Precipitation Sensors ( #.#" )
+      m99_weather_precipitation_0d:
+        friendly_name: Precipitation 0d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').0.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
+      m99_weather_precipitation_1d:
+        friendly_name: Precipitation 1d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').1.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
+      m99_weather_precipitation_2d:
+        friendly_name: Precipitation 2d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').2.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
+      m99_weather_precipitation_3d:
+        friendly_name: Precipitation 3d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').3.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
+      m99_weather_precipitation_4d:
+        friendly_name: Precipitation 4d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').4.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
+      m99_weather_precipitation_5d:
+        friendly_name: Precipitation 5d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').5.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
+      m99_weather_precipitation_6d:
+        friendly_name: Precipitation 6d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').6.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
+      m99_weather_precipitation_7d:
+        friendly_name: Precipitation 7d
+        availability_template: "{{ states('sensor.uptime_minutes') | int  > 1 }}"
+        value_template: >
+          {% set rain = state_attr('sensor.weatherflow_forecast_daily','forecast').7.precipitation | float | round(1) %}
+           {% if rain | float > 1 %}
+             {{rain}}{{ '"' }}
+           {% elif rain | float > 0 %}
+             {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
+           {% else %}{{ '-' }}
+           {% endif %}
