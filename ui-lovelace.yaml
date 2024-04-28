@@ -1,0 +1,488 @@
+## Excerpt from ui-lovelace.yaml containing my custom weather card
+
+    ## Weather Forecast Card
+    - type: custom:stack-in-card
+      mode: vertical
+      cards:
+      - type: weather-forecast
+        entity: weather.forecast_david_ln
+        name: "Colleyville, TX"
+        show_forecast: false
+        #secondary_info_attribute: extrema
+        card_mod:
+          style: |
+            .header {
+              padding-top: 12px !important;
+            }
+            .content {
+              padding-bottom: 12px !important;
+            }
+      - type: markdown
+        card_mod:
+          style: |
+            .no-header {
+              padding: 10px 10px 15px !important;
+              text-align: center;
+              color: #DADADB;
+              font-size: 13px;
+              line-height: 18px !important;
+              font-family: Roboto;
+            }
+            ha-card {
+              box-shadow: none;
+              margin-top: -35px !important;
+              margin-bottom: 5px !important;
+            }
+        content: '{{ states(''sensor.weather_description_colleyville_truncated'') }}'
+
+      ## Weather Current Day Names
+      - type: glance
+        columns: 6
+        show_icon: false
+        show_state: false
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -30px !important;
+              margin-bottom: -10px !important;
+              font-size: 10px;
+              color: #9da5b4;
+            }
+        entities:
+#          - entity: sensor.david_ln_sensors_humidity
+#            name: Humidity
+          - entity: sensor.wind_speed_average
+            name: Wind
+          - entity: sensor.m99_weather_wind_dir_0d
+            name: Direction
+          - entity: sensor.m99_weather_precipitation_0d
+            name: Precip.
+          - entity: sensor.m99_weather_hi_low_today
+            name: High/Low
+          - entity: sensor.weatherflow_outside_feels_like
+            name: Feels Like
+          - entity: sensor.david_ln_sensors_illuminance
+            name: Bright
+      ## Weather Current Day Values
+      - type: glance
+        columns: 6
+        show_icon: false
+        show_name: false
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -30px !important;
+              margin-bottom: -10px !important;
+            }
+        entities:
+#          - entity: sensor.david_ln_sensors_humidity
+          - entity: sensor.wind_speed_average
+          - entity: sensor.m99_weather_wind_dir_0d
+          - entity: sensor.m99_weather_precipitation_0d
+          - entity: sensor.m99_weather_hi_low_today
+          - entity: sensor.weatherflow_outside_feels_like
+          - entity: sensor.david_ln_sensors_illuminance_1k
+
+      ## Forecast ##
+      ## Weather Days
+      - type: glance
+        columns: 5
+        show_icon: false
+        show_name: false
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -5px !important;
+              margin-bottom: -10px !important;
+              padding-top: -15px;
+              border-top: 5px solid #222;
+            }
+            .entities { padding-top: 10px !important; }
+            div {
+              /* color: #9da5b4; */
+            }
+        entities:
+          - entity: sensor.m99_weather_date_1d
+          - entity: sensor.m99_weather_date_2d
+          - entity: sensor.m99_weather_date_3d
+          - entity: sensor.m99_weather_date_4d
+          - entity: sensor.m99_weather_date_5d
+      ## Weather Icons
+      - type: glance
+        columns: 5
+        show_name: false
+        show_state: false
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -40px !important;
+              margin-bottom: -10px !important;
+            }
+        entities:
+          - entity: sensor.m99_weather_date_1d
+          - entity: sensor.m99_weather_date_2d
+          - entity: sensor.m99_weather_date_3d
+          - entity: sensor.m99_weather_date_4d
+          - entity: sensor.m99_weather_date_5d
+      ## Weather Both Temp
+      - type: glance
+        columns: 5
+        show_name: false
+        show_icon: false
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -38px !important;
+              margin-bottom: -10px !important;
+            }
+            div {
+              color: #9da5b4 !important;
+              font-size: 14px;
+            }
+        entities:
+          - entity: sensor.m99_weather_temp_both_1d
+          - entity: sensor.m99_weather_temp_both_2d
+          - entity: sensor.m99_weather_temp_both_3d
+          - entity: sensor.m99_weather_temp_both_4d
+          - entity: sensor.m99_weather_temp_both_5d
+      ## Weather Rain
+      - type: glance
+        columns: 5
+        show_name: false
+        show_icon: false
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -32px !important;
+              margin-bottom: -15px !important;
+            }
+            div {
+              color: #4c709d !important;
+              font-size: 14px;
+            }
+        entities:
+          - entity: sensor.m99_weather_precipitation_1d
+          - entity: sensor.m99_weather_precipitation_2d
+          - entity: sensor.m99_weather_precipitation_3d
+          - entity: sensor.m99_weather_precipitation_4d
+          - entity: sensor.m99_weather_precipitation_5d
+      ## Weather Wind Both
+      - type: glance
+        columns: 5
+        show_name: false
+        show_icon: false
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -29px !important;
+              margin-bottom: -25px !important;
+            }
+            div {
+              color: #777 !important;
+              font-size: 12px;
+            }
+        entities:
+          - entity: sensor.m99_weather_wind_both_1d
+          - entity: sensor.m99_weather_wind_both_2d
+          - entity: sensor.m99_weather_wind_both_3d
+          - entity: sensor.m99_weather_wind_both_4d
+          - entity: sensor.m99_weather_wind_both_5d
+
+## BAR CARD FUTURE WEATHER ##
+      - type: custom:bar-card
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: 5px;
+              margin-bottom: -10px;
+              padding-top: 10px;
+              border-top: 5px solid #222222;
+            }
+            bar-card-card {
+              margin-right: 0px;
+              font-size: 11px;
+            }
+            bar-card-value {
+              color: #222222;
+              color: #9da5b4;
+            }
+            bar-card-iconbar {
+              width: 20px;
+              color: #333;
+              color: #dadadb;
+              margin-top: 65px;
+            }
+            bar-card-name {
+              margin: 4px 0;
+              color: #9da5b4;
+              color: #dadadb;
+            }
+            .value-direction-up {
+              #color: #dadadb;
+              margin-top: -125px;
+            }
+            bar-card-backgroundbar {
+              filter: brightness(.45);
+            }
+        positions:
+          indicator: off
+          value: inside
+          title: off
+          name: outside
+          icon: inside
+        animation:
+          state: on
+        direction: up
+        height: 100px
+        width: 22px
+        columns: 12
+        stack: horizontal
+        min: 10
+        max: 110
+        entities:
+          - sensor.weatherflow_forecast_0
+          - sensor.weatherflow_forecast_1
+          - sensor.weatherflow_forecast_2
+          - sensor.weatherflow_forecast_3
+          - sensor.weatherflow_forecast_4
+          - sensor.weatherflow_forecast_5
+          - sensor.weatherflow_forecast_6
+          - sensor.weatherflow_forecast_7
+          - sensor.weatherflow_forecast_8
+          - sensor.weatherflow_forecast_9
+          - sensor.weatherflow_forecast_10
+          - sensor.weatherflow_forecast_11
+        severity:
+        - color: rgb(242,249,255)
+          from: -20
+          to: 2
+        - color: rgb(228,242,254)
+          from: 2
+          to: 4
+        - color: rgb(215,236,254)
+          from: 4
+          to: 6
+        - color: rgb(201,229,253)
+          from: 6
+          to: 8
+        - color: rgb(187,223,253)
+          from: 8
+          to: 10
+        - color: rgb(173,216,252)
+          from: 10
+          to: 12
+        - color: rgb(159,210,252)
+          from: 12
+          to: 14
+        - color: rgb(145,203,251)
+          from: 14
+          to: 16
+        - color: rgb(131,197,250)
+          from: 16
+          to: 18
+        - color: rgb(117,190,249)
+          from: 18
+          to: 20
+        - color: rgb(103,184,248)
+          from: 20
+          to: 22
+        - color: rgb(89,177,247)
+          from: 22
+          to: 24
+        - color: rgb(75,171,246)
+          from: 24
+          to: 26
+        - color: rgb(61,164,245)
+          from: 26
+          to: 28
+        - color: rgb(47,157,244)
+          from: 28
+          to: 30
+        - color: rgb(45,155,239)
+          from: 30
+          to: 32
+        - color: rgb(44,153,234)
+          from: 32
+          to: 34
+        - color: rgb(55,157,224)
+          from: 34
+          to: 36
+        - color: rgb(66,160,215)
+          from: 36
+          to: 38
+        - color: rgb(77,164,205)
+          from: 38
+          to: 40
+        - color: rgb(88,167,196)
+          from: 40
+          to: 42
+        - color: rgb(99,171,186)
+          from: 42
+          to: 44
+        - color: rgb(110,174,177)
+          from: 44
+          to: 46
+        - color: rgb(121,178,168)
+          from: 46
+          to: 48
+        - color: rgb(132,181,159)
+          from: 48
+          to: 50
+        - color: rgb(143,185,150)
+          from: 50
+          to: 52
+        - color: rgb(154,188,141)
+          from: 52
+          to: 54
+        - color: rgb(165,192,132)
+          from: 54
+          to: 56
+        - color: rgb(176,195,123)
+          from: 56
+          to: 58
+        - color: rgb(187,199,114)
+          from: 58
+          to: 60
+        - color: rgb(198,202,105)
+          from: 60
+          to: 62
+        - color: rgb(209,205,96)
+          from: 62
+          to: 64
+        - color: rgb(220,208,87)
+          from: 64
+          to: 66
+        - color: rgb(231,211,78)
+          from: 66
+          to: 68
+        - color: rgb(242,214,69)
+          from: 68
+          to: 70
+        - color: rgb(253,217,60)
+          from: 70
+          to: 72
+        - color: rgb(247,206,58)
+          from: 72
+          to: 74
+        - color: rgb(240,194,55)
+          from: 74
+          to: 76
+        - color: rgb(234,183,53)
+          from: 76
+          to: 78
+        - color: rgb(227,171,50)
+          from: 78
+          to: 80
+        - color: rgb(221,160,48)
+          from: 80
+          to: 82
+        - color: rgb(214,148,45)
+          from: 82
+          to: 84
+        - color: rgb(208,137,43)
+          from: 84
+          to: 86
+        - color: rgb(201,125,40)
+          from: 86
+          to: 88
+        - color: rgb(195,114,38)
+          from: 88
+          to: 90
+        - color: rgb(188,102,35)
+          from: 90
+          to: 92
+        - color: rgb(182,91,33)
+          from: 92
+          to: 94
+        - color: rgb(175,79,30)
+          from: 94
+          to: 96
+        - color: rgb(169,68,28)
+          from: 96
+          to: 98
+        - color: rgb(162,56,25)
+          from: 98
+          to: 100
+        - color: rgb(155,45,23)
+          from: 100
+          to: 102
+        - color: rgb(148,33,20)
+          from: 102
+          to: 104
+        - color: rgb(141,22,18)
+          from: 104
+          to: 106
+        - color: rgb(134,11,15)
+          from: 106
+          to: 108
+        - color: rgb(127,0,12)
+          from: 108
+          to: 120
+
+# BAR CARD FUTURE HOURLY PRECIPITATION
+
+      - type: conditional
+        conditions:
+        - entity: binary_sensor.weatherflow_forecast_precip_total
+          state: 'on'
+        card:
+          type: custom:bar-card
+          card_mod:
+            style: |
+              ha-card {
+                margin-top: -15px;
+                margin-bottom: -15px;
+                padding-top: 0px;
+              }
+              bar-card-card {
+                margin-right: 0px;
+                font-size: 11px;
+              }
+              bar-card-value {
+                color: #222222;
+              }
+              bar-card-iconbar {
+                width: 20px;
+                color: #333;
+                margin-top: 85px;
+              }
+              bar-card-name {
+                margin: 4px 0;
+                color: #9da5b4;
+              }
+              .value-direction-up {
+                color: #dadadb;
+                margin-top: -120px;
+              }
+              bar-card-backgroundbar {
+                filter: brightness(.65);
+              }
+          positions:
+            indicator: off
+            value: off
+            title: off
+            name: outside
+            icon: off
+          animation:
+            state: on
+          direction: up
+          height: 25px
+          width: 22px
+          columns: 12
+          stack: horizontal
+          min: 10
+          max: 110
+          entities:
+            - sensor.weatherflow_forecast_precip_0
+            - sensor.weatherflow_forecast_precip_1
+            - sensor.weatherflow_forecast_precip_2
+            - sensor.weatherflow_forecast_precip_3
+            - sensor.weatherflow_forecast_precip_4
+            - sensor.weatherflow_forecast_precip_5
+            - sensor.weatherflow_forecast_precip_6
+            - sensor.weatherflow_forecast_precip_7
+            - sensor.weatherflow_forecast_precip_8
+            - sensor.weatherflow_forecast_precip_9
+            - sensor.weatherflow_forecast_precip_10
+            - sensor.weatherflow_forecast_precip_11
+## END BAR CARD HOURLY FORECAST ##
