@@ -368,3 +368,23 @@ sensor:
              {{ "." }}{{ ((rain | float * 10) | round(0)) }}{{ '"' }}
            {% else %}{{ '-' }}
            {% endif %}
+
+binary_sensor:
+  - platform: template
+    sensors:
+    weatherflow_forecast_precip_total:
+      friendly_name: Weather Forecast Precip Next 12
+      value_template: >
+        {{ (state_attr('sensor.weatherflow_forecast_hourly','forecast').0.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').1.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').2.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').3.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').4.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').5.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').6.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').7.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').8.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').9.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').10.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').11.precipitation | float(0) +
+           state_attr('sensor.weatherflow_forecast_hourly','forecast').12.precipitation | float(0) ) > 0 }}
